@@ -1,99 +1,181 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Trends Hub</title>
+    <title>AI Trends Hub - Premium Portal</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #1e293b;
-            color: white;
-            padding: 30px 20px;
-        }
-        h1 { margin: 0; font-size: 2.5rem; }
-        
-        /* Navigation Menu Styling */
-        nav {
-            background-color: #334155;
-            padding: 15px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        nav a:hover {
-            color: #38bdf8;
+        /* Modern CSS Variables for easy color changes */
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: rgba(22, 30, 49, 0.7);
+            --border-glow: rgba(56, 189, 248, 0.2);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-cyan: #38bdf8;
+            --accent-purple: #a855f7;
         }
 
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+        }
+
+        /* Glassmorphism Header */
+        header {
+            padding: 50px 20px 30px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        
+        /* Sleek Navbar */
+        nav {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        nav a:hover, nav a.active {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Dashboard Grid Layout */
         .container {
-            max-width: 1000px;
-            margin: 40px auto;
+            max-width: 1100px;
+            margin: 50px auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
+
+        /* Futuristic Glass Cards */
         .card {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 35px 25px;
+            border-radius: 16px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
         }
-        .card h2 { color: #1e293b; }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+        .card:hover::before { transform: translateX(100%); }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.1);
+        }
+        .card h2 { 
+            color: var(--text-primary); 
+            margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .card p { 
+            color: var(--text-secondary); 
+            line-height: 1.6;
+            font-size: 0.95rem;
+            min-height: 50px;
+        }
+
+        /* Neon Accent Buttons */
         .btn {
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #0284c7;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #0284c7, #7c3aed);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
         }
-        .btn:hover { background-color: #0369a1; }
+        .btn:hover { 
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>AI Trends Hub</h1>
-        <p>AI ki Dunya ki Taza Tareen Updates</p>
-    </header>
-
     <nav>
-        <a href="index.html">Home</a>
+        <a href="index.html" class="active">Home</a>
         <a href="prompts.html">Daily Prompts</a>
         <a href="news.html">Latest News</a>
         <a href="articles.html">Articles</a>
     </nav>
 
+    <header>
+        <h1>AI Trends Hub</h1>
+        <p>The Next-Gen Intelligence Hub & Developer Resources</p>
+    </header>
+
     <div class="container">
         <div class="card">
             <h2>Daily Prompts</h2>
-            <p>Apne kaam ko aasan banane ke liye behtareen AI prompts hasil karen.</p>
-            <a href="prompts.html" class="btn">Prompts Dekhen</a>
+            <p>Unlock optimized & high-converting engineered prompts for ChatGPT, Claude, and Midjourney.</p>
+            <a href="prompts.html" class="btn">Explore Prompts</a>
         </div>
 
         <div class="card">
             <h2>Latest News</h2>
-            <p>Artificial Intelligence ki dunya mein kya chal raha hai? Sab yahan janiye.</p>
-            <a href="news.html" class="btn">News Parhen</a>
+            <p>Get real-time global breaking updates and tech insights from the shifting world of AI agents.</p>
+            <a href="news.html" class="btn">Read Updates</a>
         </div>
 
         <div class="card">
-            <h2>Articles</h2>
-            <p>AI trends aur deep learning par tafseeli aur maloomati articles.</p>
-            <a href="articles.html" class="btn">Articles Parhen</a>
+            <h2>In-Depth Articles</h2>
+            <p>Read beautifully constructed human-written stories on deep learning and neural breakthroughs.</p>
+            <a href="articles.html" class="btn">Browse Articles</a>
         </div>
     </div>
 
