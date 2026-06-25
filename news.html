@@ -3,68 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latest News - AI Trends Hub</title>
+    <title>Global Briefing | AI Trends Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; text-align: center; }
-        header { background-color: #1e293b; color: white; padding: 20px; }
-        nav { background-color: #334155; padding: 15px; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
-        nav a:hover { color: #38bdf8; }
-        .container { max-width: 850px; margin: 40px auto; padding: 0 20px; text-align: left; }
-        .news-card { background: white; padding: 25px; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #38bdf8; }
-        .date { color: #0284c7; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; }
-        .news-card h3 { margin: 5px 0 10px 0; color: #1e293b; font-size: 1.4rem; }
-        .news-card p { color: #475569; line-height: 1.6; margin: 0; font-size: 1.05rem; }
+        :root {
+            --bg-global: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-premium: #4f46e5;
+            --accent-success: #0d9488;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 12px 34px rgba(15, 23, 42, 0.06);
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; background-color: var(--bg-global); color: var(--text-main); }
+        
+        .top-ticker { background-color: #ffffff; border-bottom: 1px solid var(--border-color); padding: 10px 24px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; }
+        .live-badge { background: rgba(13, 148, 136, 0.1); color: var(--accent-success); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; letter-spacing: 0.05em; }
+        
+        nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 20px 40px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.03em; text-decoration: none; }
+        .logo span { color: var(--accent-premium); }
+        nav .links a { color: var(--text-muted); text-decoration: none; margin-left: 30px; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+        nav .links a:hover, nav .links a.active { color: var(--accent-premium); }
+
+        header { position: relative; padding: 80px 20px; text-align: center; background: linear-gradient(135deg, rgba(241, 245, 249, 0.9), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; border-bottom: 1px solid var(--border-color); }
+        header h1 { margin: 0; font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; color: #1e293b; }
+        header p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 10px auto 0 auto; font-weight: 500; }
+
+        .main-container { max-width: 850px; margin: 50px auto; padding: 0 20px; }
+        
+        .news-card { background: var(--bg-card); border-radius: 20px; padding: 35px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); margin-bottom: 30px; transition: 0.3s; }
+        .news-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .news-tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--accent-success); letter-spacing: 0.05em; display: inline-block; margin-bottom: 10px; }
+        .news-card h3 { font-size: 1.4rem; margin: 0 0 12px 0; font-weight: 700; line-height: 1.3; color: #1e293b; }
+        .news-card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.65; margin: 0; }
+
+        footer { background: #ffffff; border-top: 1px solid var(--border-color); padding: 60px 20px; text-align: center; margin-top: 100px; }
+        footer p { font-weight: 700; color: var(--text-muted); margin-bottom: 25px; font-size: 1.05rem; }
+        .social-links a { display: inline-block; margin: 0 15px; text-decoration: none; font-weight: 700; font-size: 0.95rem; padding: 12px 24px; border-radius: 30px; transition: 0.2s; border: 1px solid var(--border-color); }
+        .instagram { color: #e1306c; background: rgba(225, 48, 108, 0.04); }
+        .youtube { color: #ff0000; background: rgba(255, 0, 0, 0.04); }
+        .pinterest { color: #bd081c; background: rgba(189, 8, 28, 0.04); }
+        .social-links a:hover { transform: scale(1.05); box-shadow: var(--shadow-sm); }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Latest AI News</h1>
-        <p>Stay updated with the top 5 trending global AI stories today</p>
-    </header>
+    <div class="top-ticker">
+        <div class="live-badge">GLOBAL FEED LIVE</div>
+        <div id="current-date">Loading dynamic calendar...</div>
+    </div>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="prompts.html">Daily Prompts</a>
-        <a href="news.html">Latest News</a>
-        <a href="articles.html">Articles</a>
+        <a href="index.html" class="logo">AI TRENDS <span>HUB</span></a>
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="prompts.html">Daily Prompts</a>
+            <a href="news.html" class="active">Latest News</a>
+            <a href="articles.html">Articles</a>
+        </div>
     </nav>
 
-    <div class="container">
-        <h2>Breaking AI Updates</h2>
+    <header>
+        <h1>Global Intelligence Briefing</h1>
+        <p>Stay updated with the top 5 highly verified developments across autonomous technology ecosystems.</p>
+    </header>
+
+    <div class="main-container">
 
         <div class="news-card">
-            <span class="date">Trending Now</span>
-            <h3>1. The Rise of "Reasoning" AI: Next-Gen Models Shift from Answering to Thinking</h3>
-            <p>The tech world is buzzing as major AI labs deploy models that don't just guess the next word but actually 'think' before they reply. These new reasoning models break down complex logic, math, and coding problems into hidden steps, mimicking human contemplation. Experts say this marks the end of simple chatbots and the beginning of genuine problem-solving assistants.</p>
+            <span class="news-tag">Reasoning Systems</span>
+            <h3>1. The Shift to "Thinking" Models: Delayed Response Architectures Dominate</h3>
+            <p>The tech ecosystem is pivoting from instant word guessing to structured computing paths. The newest intelligence releases utilize internal reasoning blocks before answering, breaking down complex mathematical and systems programming anomalies like an expert programmer inside a hidden workspace sandbox.</p>
         </div>
 
         <div class="news-card">
-            <span class="date">Global Impact</span>
-            <h3>2. AI Wearables and Smart Glasses Take Center Stage, Challenging Smartphones</h3>
-            <p>Are smartphones losing their crown? The latest tech conventions show a massive surge in AI-powered smart glasses and minimal wearable pins. These devices use advanced computer vision to look at your surroundings, translate signboards in real-time, and answer questions directly into your ears, proving that the future of AI is hands-free and completely ambient.</p>
+            <span class="news-tag">Spatial Computing</span>
+            <h3>2. Ambient Wearables Challenge Smartphone Screen Monopolies</h3>
+            <p>Recent product playbooks display a significant shift toward integrated spatial hardware and sleek computer-vision smart glasses. These minimalist systems interpret live signages, translate conversations on the fly, and project contextual utility directly without pulling users into endless screen doom-scrolling loops.</p>
         </div>
 
         <div class="news-card">
-            <span class="date">Creative Industry</span>
-            <h3>3. Hollywood Adapts as AI Video Generators Reach Photorealistic Quality</h3>
-            <p>Text-to-video AI tools have officially crossed the uncanny valley. The latest software updates allow anyone to generate hyper-realistic, 4K video clips using just simple text prompts. While independent filmmakers are celebrating the massive budget cuts, dynamic debates are sparking in Hollywood regarding intellectual property and the future of traditional special effects teams.</p>
+            <span class="news-tag">Media Pipelines</span>
+            <h3>3. Photorealistic Physics Engines Reshape Independent Movie Production</h3>
+            <p>Generative text-to-video platforms have successfully stabilized dynamic light reflections and structural physical properties across frames. This stabilization allows visual creators to produce movie-grade short sequences from basic notes, drastically cutting overhead costs for boutique visual design studios.</p>
         </div>
 
         <div class="news-card">
-            <span class="date">Tech Breakthrough</span>
-            <h3>4. AI Agents Are Officially Taking Over Daily Corporate Workloads</h3>
-            <p>We are shifting from conversational AI to 'Agentic AI'. New autonomous AI agents are now capable of operating software just like a human. They can open spreadsheets, navigate complex company dashboards, send emails, and coordinate projects across different teams completely on autopilot, redefining office productivity frameworks globally.</p>
+            <span class="news-tag">Agentic Layer</span>
+            <h3>4. Autonomous System Agents Take Over Internal Infrastructure Workflows</h3>
+            <p>We are entering the era of active 'Agentic Scripts'. Instead of simple conversational interactions, new automated scripts operate cloud software dashboards independently, processing complex server balance updates and coordinating software pipelines with minimal human intervention.</p>
         </div>
 
         <div class="news-card">
-            <span class="date">Medical Science</span>
-            <h3>5. AI Accelerates Medical Research by Designing Custom Proteins in Record Time</h3>
-            <p>In a massive win for healthcare, medical researchers have successfully used advanced neural networks to design entirely brand-new proteins that do not exist in nature. This breakthrough is expected to compress decades of laboratory trial-and-error into mere weeks, opening the doors for highly personalized medicine and fast-tracked vaccine development.</p>
+            <span class="news-tag">BioTech Innovations</span>
+            <h3>5. Multi-Layer Neural Testing Accelerates Complex Protein Engineering</h3>
+            <p>In a groundbreaking achievement for digital health, analytical systems successfully formulated synthetic molecular configurations completely unfamiliar to evolutionary biology. This algorithmic acceleration compresses years of pipeline trial phases down to a couple of computing hours.</p>
         </div>
 
     </div>
 
+    <footer>
+        <p>Connect With Our Premium Content Channels</p>
+        <div class="social-links">
+            <a href="#" target="_blank" class="instagram">Instagram</a>
+            <a href="#" target="_blank" class="youtube">YouTube</a>
+            <a href="#" target="_blank" class="pinterest">Pinterest</a>
+        </div>
+    </footer>
+
+    <script>
+        function updatePortalDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today  = new Date();
+            document.getElementById("current-date").innerText = today.toLocaleDateString("en-US", options);
+        }
+        updatePortalDate();
+    </script>
 </body>
 </html>
