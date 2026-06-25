@@ -3,169 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trending Daily Prompts - AI Trends Hub</title>
+    <title>Verified Prompts | AI Trends Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; text-align: center; }
-        header { background-color: #1e293b; color: white; padding: 20px; }
-        nav { background-color: #334155; padding: 15px; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
-        nav a:hover { color: #38bdf8; }
-        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; text-align: left; }
-        .section-title { color: #1e293b; border-bottom: 2px solid #0284c7; padding-bottom: 5px; margin-top: 30px; }
-        .prompt-box { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 5px solid #0284c7; }
-        .prompt-text { background: #f1f5f9; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 0.95rem; color: #0369a1; line-height: 1.5; margin-top: 10px; word-break: break-word; }
-        h3 { margin: 0; color: #334155; }
-        p { margin: 5px 0 0 0; color: #64748b; }
+        :root {
+            --bg-global: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-premium: #4f46e5;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 12px 34px rgba(15, 23, 42, 0.06);
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; background-color: var(--bg-global); color: var(--text-main); }
+        
+        .top-ticker { background-color: #ffffff; border-bottom: 1px solid var(--border-color); padding: 10px 24px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; }
+        .live-badge { background: rgba(79, 70, 229, 0.1); color: var(--accent-premium); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; letter-spacing: 0.05em; }
+        
+        nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 20px 40px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.03em; text-decoration: none; }
+        .logo span { color: var(--accent-premium); }
+        nav .links a { color: var(--text-muted); text-decoration: none; margin-left: 30px; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+        nav .links a:hover, nav .links a.active { color: var(--accent-premium); }
+
+        header { position: relative; padding: 80px 20px; text-align: center; background: linear-gradient(135deg, rgba(241, 245, 249, 0.9), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; border-bottom: 1px solid var(--border-color); }
+        header h1 { margin: 0; font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; color: #1e293b; }
+        header p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 10px auto 0 auto; font-weight: 500; }
+
+        .main-container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        .section-title { font-size: 1.6rem; font-weight: 800; color: #1e293b; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+        
+        .prompt-row { background: var(--bg-card); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 15px; box-shadow: var(--shadow-sm); margin-bottom: 25px; transition: 0.3s; }
+        .prompt-row:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .prompt-header { display: flex; justify-content: space-between; align-items: center; }
+        .p-num { font-weight: 800; color: var(--accent-premium); font-size: 1.2rem; }
+        .p-cat { background: #f1f5f9; padding: 6px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }
+        .prompt-row h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+        .prompt-row p { margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+        .prompt-code { background: #f8fafc; border: 1px solid #e2e8f0; padding: 18px; border-radius: 12px; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; color: #1e293b; line-height: 1.6; word-break: break-word; font-weight: 500; }
+
+        footer { background: #ffffff; border-top: 1px solid var(--border-color); padding: 60px 20px; text-align: center; margin-top: 100px; }
+        footer p { font-weight: 700; color: var(--text-muted); margin-bottom: 25px; font-size: 1.05rem; }
+        .social-links a { display: inline-block; margin: 0 15px; text-decoration: none; font-weight: 700; font-size: 0.95rem; padding: 12px 24px; border-radius: 30px; transition: 0.2s; border: 1px solid var(--border-color); }
+        .instagram { color: #e1306c; background: rgba(225, 48, 108, 0.04); }
+        .youtube { color: #ff0000; background: rgba(255, 0, 0, 0.04); }
+        .pinterest { color: #bd081c; background: rgba(189, 8, 28, 0.04); }
+        .social-links a:hover { transform: scale(1.05); box-shadow: var(--shadow-sm); }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Trending AI Prompts</h1>
-        <p>20 Advanced & Latest Prompts for ChatGPT, Claude, and Midjourney</p>
-    </header>
+    <div class="top-ticker">
+        <div class="live-badge">PROMPT REGISTRY</div>
+        <div id="current-date">Loading dynamic calendar...</div>
+    </div>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="prompts.html">Daily Prompts</a>
-        <a href="news.html">Latest News</a>
-        <a href="articles.html">Articles</a>
+        <a href="index.html" class="logo">AI TRENDS <span>HUB</span></a>
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="prompts.html" class="active">Daily Prompts</a>
+            <a href="news.html">Latest News</a>
+            <a href="articles.html">Articles</a>
+        </div>
     </nav>
 
-    <div class="container">
+    <header>
+        <h1>Advanced Prompt Library</h1>
+        <p>20 trending, copy-paste ready engineered inputs optimized for deep generative workflows.</p>
+    </header>
 
-        <h2 class="section-title">1. Content Creation & Copywriting</h2>
+    <div class="main-container">
         
-        <div class="prompt-box">
-            <h3>Prompt 1: The Ultimate Blog Post Writer</h3>
-            <p>Write a highly engaging blog post with a natural human flow.</p>
-            <div class="prompt-text">"Act as a master copywriter. Write a 1000-word blog post about [Topic]. Use a conversational, storytelling tone. Avoid corporate jargon, use short sentences, and break it down with engaging subheadings. Include a compelling introduction that hooks the reader instantly."</div>
+        <h2 class="section-title">1. Content & Copywriting</h2>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#01</span><span class="p-cat">Copywriting Frameworks</span></div>
+            <h3>The Ultimate Narrative Blog Writer</h3>
+            <p>Generates a highly compelling, deep article with a completely organic human tone flow.</p>
+            <div class="prompt-code">"Act as a master copywriter. Write a 1000-word essay on [Topic]. Introduce deliberate structural variations, utilize varied paragraph lengths, introduce slight imperfect transitions, and emphasize realistic storytelling logic over simple definitions."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#02</span><span class="p-cat">Organic Retention</span></div>
+            <h3>Viral Case Study Layout</h3>
+            <p>Formats real-world case studies emphasizing engineering challenges instead of generic business pitches.</p>
+            <div class="prompt-code">"Draft a narrative-driven technical case study layout. Focus heavily on actual system bottlenecks discovered during implementation phases rather than marketing conclusions."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#03</span><span class="p-cat">Script Architecture</span></div>
+            <h3>Pattern-Interrupt Video Script</h3>
+            <p>Designed for high retention education layouts.</p>
+            <div class="prompt-code">"Structure an educational multimedia breakdown explaining [Concept]. Build a high-retention structural map using immediate pattern interrupts within the opening twenty seconds."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#04</span><span class="p-cat">Humanizing Engine</span></div>
+            <h3>Text De-Robotizer</h3>
+            <p>Removes AI cliches and structures text to pass as natural human thought lines.</p>
+            <div class="prompt-code">"Analyze the provided text. Rewrite it completely by injecting a realistic personality. Vary the pace, eliminate repetitive analytical bullet structures, and completely avoid terms like 'delve, testament, leverage, underscore': [Paste text]"</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#05</span><span class="p-cat">Outreach Copy</span></div>
+            <h3>Zero-Fluff Cold Outreach Pitch</h3>
+            <p>High response email outreach optimized for busy engineers.</p>
+            <div class="prompt-code">"Draft an unambiguous, hyper-targeted zero-fluff communication proposal for systems engineering leads, keeping total text blocks under a hundred words and avoiding hollow flattery."</div>
         </div>
 
-        <div class="prompt-box">
-            <h3>Prompt 2: Viral LinkedIn Post Generator</h3>
-            <p>Create a hook-driven LinkedIn post that drives high engagement.</p>
-            <div class="prompt-text">"Write a LinkedIn post about [Achievement/Lesson Learned]. Start with a powerful 1-line hook that creates curiosity. Use short paragraphs (1-2 sentences max) with plenty of white space. End with an engaging question to drive comments. Do not use generic emojis."</div>
+        <h2 class="section-title">2. Engineering & Architecture</h2>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#06</span><span class="p-cat">Database Engineering</span></div>
+            <h3>SQL Optimization & CTE Restructuring</h3>
+            <p>Cleans nested queries for efficient query optimization indexes.</p>
+            <div class="prompt-code">"Review this query for potential nested loop bottlenecks. Refactor using clear CTE pathways and index-friendly filtering conditions: [Insert Query]"</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#07</span><span class="p-cat">User Interface Layouts</span></div>
+            <h3>Asymmetrical HTML5/CSS Component Generator</h3>
+            <p>Builds layout arrays using minimal native styling blocks.</p>
+            <div class="prompt-code">"Generate responsive semantic HTML5 layouts using flexible grids for an asymmetrical analytical panel dashboard. Utilize minimal native styling structures."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#08</span><span class="p-cat">Debugging Blocks</span></div>
+            <h3>Memory Leak Diagnostic Agent</h3>
+            <p>Scans async loop systems for performance degradation drops.</p>
+            <div class="prompt-code">"Analyze this function implementation block for memory leaks or unhandled promise errors during high-frequency parallel polling: [Paste block]"</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#09</span><span class="p-cat">Integration Modules</span></div>
+            <h3>Paginated Data Fetch Suite</h3>
+            <p>Generates production-grade boilerplates for data streams.</p>
+            <div class="prompt-code">"Build boilerplate modular integration functions implementing native error handling patterns for paginated data ingestion pipelines."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#10</span><span class="p-cat">Automated Testing</span></div>
+            <h3>Edge Case Assertion Generator</h3>
+            <p>Builds testing criteria evaluating boundary data parameters.</p>
+            <div class="prompt-code">"Generate comprehensive test fixtures evaluating boundary configurations and edge data objects inside this mathematical parsing class: [Insert Code]"</div>
         </div>
 
-        <div class="prompt-box">
-            <h3>Prompt 3: YouTube Video Script (Hook & Outline)</h3>
-            <p>Structure a video script designed to maximize viewer retention.</p>
-            <div class="prompt-text">"Create a detailed video script outline for a YouTube video titled '[Your Title]'. Give me a 30-second high-retention intro hook, followed by a chronological breakdown of 5 core value points, and a seamless call-to-action transition at the end."</div>
+        <h2 class="section-title">3. SEO & System Strategy</h2>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#11</span><span class="p-cat">Audience Mapping</span></div>
+            <h3>Decoupled Framework Transition Auditor</h3>
+            <p>Traces operational friction loops during system structural migrations.</p>
+            <div class="prompt-code">"Construct a behavioral user profile for developers adjusting from monolithic code architectures to decoupled operational micro-services. List core structural pain points."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#12</span><span class="p-cat">SEO Semantic Clusters</span></div>
+            <h3>Semantic Search Pattern Mapper</h3>
+            <p>Traces user search query behaviors into logical informational blocks.</p>
+            <div class="prompt-code">"Perform a semantic map query surrounding [Topic]. Organize intent layers into strictly informational versus active diagnostic search patterns."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#13</span><span class="p-cat">Growth Messaging</span></div>
+            <h3>PAS Landing Page Copy Architect</h3>
+            <p>Builds crisp sales conversion flows without typical marketing noise.</p>
+            <div class="prompt-code">"Formulate an optimization landing string layout built completely around the PAS framework. Eliminate generic value declarations entirely."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#14</span><span class="p-cat">UI Content Architecture</span></div>
+            <h3>Cognitive Friction Copy Auditor</h3>
+            <p>Audits checkout tunnel copy to drop cart abandonments.</p>
+            <div class="prompt-code">"Review the microcopy inside this user setup checkout tunnel. Modify text strings to clearly eliminate cognitive confusion regarding data tracking."</div>
+        </div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#15</span><span class="p-cat">Performance Mapping</span></div>
+            <h3>Multi-Region Latency Route Planner</h3>
+            <p>Maps query delays across worldwide node arrays.</p>
+            <div class="prompt-code">"Design a system load mapping framework tracking data ingestion delays over multi-regional cloud distribution pathways. Propose backup routing patterns."</div>
         </div>
 
-        <div class="prompt-box">
-            <h3>Prompt 4: Newsletter Welcome Sequence</h3>
-            <p>Draft an email that builds immediate trust with new subscribers.</p>
-            <div class="prompt-text">"Write a welcome email for a new subscriber to my newsletter about [Niche]. Keep it warm, personalized, and human. Share a brief 3-sentence origin story, explain exactly what value they will get every week, and ask them one simple question to reply to."</div>
+        <h2 class="section-title">4. Design & Advanced Productivity</h2>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#16</span><span class="p-cat">Accelerated Learning</span></div>
+            <h3>First-Principles System Synthesizer</h3>
+            <p>Breaks down abstract technology standards to core fundamental variables.</p>
+            <div class="prompt-code">"Deconstruct the architecture of distributed network consensus models using first-principles logic. Focus entirely on structural trade-offs."</div>
         </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 5: Humanizing AI Text</h3>
-            <p>Rewrite robotic AI text to make it sound like a real person wrote it.</p>
-            <div class="prompt-text">"Analyze the following text and rewrite it to sound completely natural and human. Vary the sentence lengths drastically, introduce slight casual transitions, remove repetitive buzzwords like 'testament, delve, leverage, revolutionize', and inject a realistic personality: [Paste text here]"</div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#17</span><span class="p-cat">Photorealism Engineering</span></div>
+            <h3>Midjourney v6 Realistic Studio Portrait</h3>
+            <p>Generates cinematic imagery using natural photography properties.</p>
+            <div class="prompt-code">"A candid snapshot of a research engineer inside a minimal modern laboratory room, natural diffused window lighting, raw film grain textures, shot on 50mm lens, aperture f/2.8 --ar 16:9 --v 6.0"</div>
         </div>
-
-
-        <h2 class="section-title">2. Business, Marketing & SEO</h2>
-
-        <div class="prompt-box">
-            <h3>Prompt 6: High-Converting Landing Page Copy</h3>
-            <p>Generate copy based on modern conversion frameworks.</p>
-            <div class="prompt-text">"Create a full landing page copywriting wireframe for a product that does [Product Description]. Structure it using the PAS (Problem-Agitate-Solve) framework. Include a Hero Headline, Subheadline, Pain Point section, Benefit bullets, and a high-urgency Call-to-Action button text."</div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#18</span><span class="p-cat">Vector Generation</span></div>
+            <h3>Midjourney Matte Geometric Vector Emblem</h3>
+            <p>Clean layout guidelines for scalable corporate modern logomarks.</p>
+            <div class="prompt-code">"A clean geometry-focused abstract emblem vector layout for a data infrastructure system, solid matte gray elements on an isolated crisp layout background --v 6.0"</div>
         </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 7: SEO Content Keyword Strategy</h3>
-            <p>Map out semantic keywords and search intent for a target topic.</p>
-            <div class="prompt-text">"I want to rank for the keyword '[Target Keyword]'. Provide a list of 15 secondary keywords, LSI terms, and long-tail questions that users search for. Categorize them by Search Intent (Informational, Transactional, Commercial) and suggest 3 unique content angles."</div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#19</span><span class="p-cat">Advanced Synthesis</span></div>
+            <h3>Technical Manual Deconstructor</h3>
+            <p>Extracts functional blueprint summaries out of deep textbook resources.</p>
+            <div class="prompt-code">"Synthesize the practical systems optimization insights from the provided non-fiction manual. Provide structured operational flow charts based on its thesis."</div>
         </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 8: Perfect Customer Persona Creator</h3>
-            <p>Build a detailed avatar of your target audience.</p>
-            <div class="prompt-text">"Generate a detailed buyer persona for a customer looking to buy [Your Product/Service]. Include demographic details, their 3 biggest daily frustrations, their ultimate career/personal goals, buying objections, and the exact emotional triggers that make them buy."</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 9: Competitor Content Gap Analysis</h3>
-            <p>Find weaknesses in competing websites to rank higher.</p>
-            <div class="prompt-text">"My main competitors are writing about [Topic]. Act as an SEO expert and tell me 5 content gaps or angles they usually overlook. Suggest how I can create a '10x better' resource on this topic that provides deeper utility to readers."</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 10: Cold Email outreach Pitch</h3>
-            <p>Write a B2B sales email that actually gets replies.</p>
-            <div class="prompt-text">"Write a cold outreach email to a [Target Job Title] offering [Your Service]. Keep it under 150 words. Do not praise them falsely. Start with a hyper-specific observation, state a clear problem you solve, present one sentence of proof, and end with a low-friction call to action like 'Open to looking at a quick loom video?'"</div>
-        </div>
-
-
-        <h2 class="section-title">3. Coding & Software Development</h2>
-
-        <div class="prompt-box">
-            <h3>Prompt 11: Code Debugger & Explainer</h3>
-            <p>Find bugs and explain the structural fix cleanly.</p>
-            <div class="prompt-text">"Act as a Senior Developer. Review this code snippet for any bugs, performance bottlenecks, or security flaws. Explain the issues clearly and provide an optimized, refactored version of the code using best practices: [Insert Code]"</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 12: Modern CSS Layout Builder</h3>
-            <p>Generate clean HTML/CSS code for responsive components.</p>
-            <div class="prompt-text">"Write clean, responsive HTML and semantic CSS using Flexbox or Grid for a [Component name, e.g., Pricing Card Grid]. It must look modern, include hover effects, be mobile-friendly, and use a beautiful modern color scheme (provide hex codes)."</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 13: SQL Query Architect</h3>
-            <p>Build optimized database queries based on real scenarios.</p>
-            <div class="prompt-text">"Act as a database administrator. Write an optimized SQL query to extract [Describe data needed, e.g., top 10 customers who spent the most money in the last 30 days]. Here is my database schema structure: [Paste tables/columns details]"</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 14: API Integration Helper</h3>
-            <p>Generate boilerplate code to fetch data from endpoints.</p>
-            <div class="prompt-text">"Write a JavaScript/Python function using modern best practices to fetch data from an external API endpoint. Handle loading states, potential errors (like 404 or 500 errors) gracefully using try/catch, and format the returned JSON into a clean structure."</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 15: Unit Test Suite Generator</h3>
-            <p>Generate exhaustive edge-case test blocks for functions.</p>
-            <div class="prompt-text">"Generate a comprehensive set of unit tests for the following function using [Testing Framework, e.g., Jest/PyTest]. Make sure to test for standard inputs, edge cases, null values, and incorrect data types: [Paste Function]"</div>
-        </div>
-
-
-        <h2 class="section-title">4. Personal Productivity & Midjourney</h2>
-
-        <div class="prompt-box">
-            <h3>Prompt 16: The 80/20 Rule Skill Accelerator</h3>
-            <p>Learn any complex skill quickly by focusing on core concepts.</p>
-            <div class="prompt-text">"I want to learn [Skill, e.g., Public Speaking] from scratch. Use the Pareto Principle (80/20 Rule) to identify the 20% of core concepts that will yield 80% of the results. Create a highly structured 4-week learning plan with daily actionable milestones."</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 17: Mental Framework Decision Maker</h3>
-            <p>Analyze tough life/business choices through analytical models.</p>
-            <div class="prompt-text">"I am facing a difficult decision: [Describe decision]. Help me analyze this choice using 3 mental frameworks: First Principles thinking, Second-Order Effects (long term consequences), and Regret Minimization Framework. Compare the pros and cons."</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 18: Midjourney v6 Photorealistic Portrait</h3>
-            <p>Generate highly realistic human images with proper camera tags.</p>
-            <div class="prompt-text">"A close-up cinematic portrait of a [Description of person], natural lighting, soft shadows, shot on 85mm lens, f/1.4 aperture, photorealistic, highly detailed skin texture, hyper-realistic, volumetric lighting, editorial style --ar 16:9 --v 6.0"</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 19: Midjourney Minimalist Vector Logo</h3>
-            <p>Create clean, scalable logo designs using proper art styling.</p>
-            <div class="prompt-text">"A minimalist flat vector logo design of [Subject/Animal/Symbol] for a tech company, clean lines, geometric shapes, modern typography style, isolated on a solid white background, graphic design, corporate identity, trending on Dribbble --v 6.0"</div>
-        </div>
-
-        <div class="prompt-box">
-            <h3>Prompt 20: Complex Book Synthesizer</h3>
-            <p>Extract deep actionable lessons from non-fiction books.</p>
-            <div class="prompt-text">"Provide a comprehensive synthesis of the book '[Book Title]' by [Author]. Do not just summarize chapters. Give me the 3 most profound paradigm shifts from the book, 5 actionable daily habits recommended by the author, and a concrete example of how to apply its core thesis in real life today."</div>
+        <div class="prompt-row">
+            <div class="prompt-header"><span class="p-num">#20</span><span class="p-cat">Productivity Auditing</span></div>
+            <h3>Cognitive Context-Switch Auditor</h3>
+            <p>Audits workspace habits to minimize operational mental exhaustion blocks.</p>
+            <div class="prompt-code">"Analyze my current deep-work scheduling block parameters. Identify structural focus points where task switching introduces significant mental fatigue loops."</div>
         </div>
 
     </div>
 
+    <footer>
+        <p>Connect With Our Premium Content Channels</p>
+        <div class="social-links">
+            <a href="#" target="_blank" class="instagram">Instagram</a>
+            <a href="#" target="_blank" class="youtube">YouTube</a>
+            <a href="#" target="_blank" class="pinterest">Pinterest</a>
+        </div>
+    </footer>
+
+    <script>
+        function updatePortalDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today  = new Date();
+            document.getElementById("current-date").innerText = today.toLocaleDateString("en-US", options);
+        }
+        updatePortalDate();
+    </script>
 </body>
 </html>
