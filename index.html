@@ -3,181 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Trends Hub - Premium Portal</title>
+    <title>AI Trends Hub | Premium Intelligence Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Modern CSS Variables for easy color changes */
         :root {
-            --bg-main: #0b0f19;
-            --bg-card: rgba(22, 30, 49, 0.7);
-            --border-glow: rgba(56, 189, 248, 0.2);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-cyan: #38bdf8;
-            --accent-purple: #a855f7;
+            --bg-global: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-premium: #4f46e5; /* Sophisticated Indigo */
+            --accent-success: #0d9488;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 12px 34px rgba(15, 23, 42, 0.06);
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--bg-global);
+            color: var(--text-main);
+            scroll-behavior: smooth;
         }
 
-        /* Glassmorphism Header */
+        /* Top Bar with Dynamic Date & Day */
+        .top-ticker {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 24px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .live-badge {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--accent-premium);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Modern Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 20px 40px;
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.03em; }
+        .logo span { color: var(--accent-premium); }
+        nav .links a {
+            color: var(--text-muted); text-decoration: none;
+            margin-left: 30px; font-size: 0.95rem; font-weight: 600; transition: 0.2s;
+        }
+        nav .links a:hover { color: var(--accent-premium); }
+
+        /* Premium Visual Header with Realistic Image Blend */
         header {
-            padding: 50px 20px 30px 20px;
+            position: relative;
+            padding: 100px 20px;
             text-align: center;
+            background: linear-gradient(135deg, rgba(241, 245, 249, 0.9), rgba(255, 255, 255, 0.95)), 
+                        url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--border-color);
         }
         header h1 {
-            margin: 0;
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin: 0; font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.15;
+            color: #1e293b;
         }
-        header p {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
+        header p { color: var(--text-muted); font-size: 1.25rem; max-width: 600px; margin: 15px auto 0 auto; font-weight: 500; }
+
+        .main-container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
         
-        /* Sleek Navbar */
-        nav {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
+        .section-heading {
+            font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 30px;
+            display: flex; align-items: center; gap: 12px;
         }
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .section-heading::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
+
+        /* Grid Layouts */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-bottom: 60px; }
+
+        /* Premium Clean Cards */
+        .premium-card {
+            background: var(--bg-card); border-radius: 20px; padding: 30px;
+            border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        nav a:hover, nav a.active {
-            color: var(--accent-cyan);
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        .premium-card:hover {
+            transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #cbd5e1;
         }
 
-        /* Dashboard Grid Layout */
-        .container {
-            max-width: 1100px;
-            margin: 50px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* News Cards Design */
+        .news-tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--accent-success); letter-spacing: 0.05em; }
+        .premium-card h3 { font-size: 1.3rem; margin: 10px 0; font-weight: 700; line-height: 1.3; }
+        .premium-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; }
+
+        /* Research Article Layout */
+        .article-card { border-left: 4px solid var(--accent-premium); }
+        .read-time { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+
+        /* Prompts Layout - Interactive Look */
+        .prompt-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 60px; }
+        .prompt-row {
+            background: var(--bg-card); padding: 25px; border-radius: 16px;
+            border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+        .prompt-header { display: flex; justify-content: space-between; align-items: center; }
+        .p-num { font-weight: 700; color: var(--accent-premium); font-size: 1.1rem; }
+        .p-cat { background: #f1f5f9; padding: 4px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+        .prompt-code {
+            background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px;
+            font-family: monospace; font-size: 0.95rem; color: #1e293b; line-height: 1.5; position: relative;
         }
 
-        /* Futuristic Glass Cards */
-        .card {
-            background: var(--bg-card);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 35px 25px;
-            border-radius: 16px;
-            border: 1px solid var(--border-glow);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: left;
-            position: relative;
-            overflow: hidden;
+        /* Premium Modern Footer with Customizable Social Handles */
+        footer {
+            background: #ffffff; border-top: 1px solid var(--border-color);
+            padding: 60px 20px; text-align: center;
         }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
+        footer p { font-weight: 600; color: var(--text-muted); margin-bottom: 20px; }
+        .social-links a {
+            display: inline-block; margin: 0 15px; text-decoration: none;
+            font-weight: 700; font-size: 1rem; padding: 10px 20px; border-radius: 30px;
+            transition: 0.2s; border: 1px solid var(--border-color);
         }
-        .card:hover::before { transform: translateX(100%); }
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(56, 189, 248, 0.5);
-            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.1);
-        }
-        .card h2 { 
-            color: var(--text-primary); 
-            margin-top: 0;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        .card p { 
-            color: var(--text-secondary); 
-            line-height: 1.6;
-            font-size: 0.95rem;
-            min-height: 50px;
-        }
-
-        /* Neon Accent Buttons */
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #0284c7, #7c3aed);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-        }
-        .btn:hover { 
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
-        }
+        .instagram { color: #e1306c; background: rgba(225, 48, 108, 0.05); }
+        .youtube { color: #ff0000; background: rgba(255, 0, 0, 0.05); }
+        .pinterest { color: #bd081c; background: rgba(189, 8, 28, 0.05); }
+        
+        .social-links a:hover { transform: scale(1.05); box-shadow: var(--shadow-sm); }
     </style>
 </head>
 <body>
 
+    <div class="top-ticker">
+        <div class="live-badge">SYSTEM OPERATIONAL</div>
+        <div id="current-date">Loading dynamic calendar...</div>
+    </div>
+
     <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="prompts.html">Daily Prompts</a>
-        <a href="news.html">Latest News</a>
-        <a href="articles.html">Articles</a>
+        <div class="logo">AI TRENDS <span>HUB</span></div>
+        <div class="links">
+            <a href="#news">Latest News</a>
+            <a href="#prompts">Daily Prompts</a>
+            <a href="#articles">Research Articles</a>
+        </div>
     </nav>
 
     <header>
-        <h1>AI Trends Hub</h1>
-        <p>The Next-Gen Intelligence Hub & Developer Resources</p>
+        <h1>The Intelligence Network <br>For Modern Engineers</h1>
+        <p>Curated breakthroughs, verified prompts, and realistic analysis of autonomous system developments.</p>
     </header>
 
-    <div class="container">
-        <div class="card">
-            <h2>Daily Prompts</h2>
-            <p>Unlock optimized & high-converting engineered prompts for ChatGPT, Claude, and Midjourney.</p>
-            <a href="prompts.html" class="btn">Explore Prompts</a>
+    <div class="main-container">
+
+        <h2 id="news" class="section-heading">Global Intelligence Briefing</h2>
+        <div class="grid-3">
+            <div class="premium-card">
+                <span class="news-tag">Reasoning Systems</span>
+                <h3>01. AI Architectures Pivot into Delayed Response Frameworks</h3>
+                <p>New enterprise structures choose logical pre-computation tracks over instantaneous token generation, changing processing expectations across standard user interfaces.</p>
+            </div>
+            <div class="premium-card">
+                <span class="news-tag">Hardware Trends</span>
+                <h3>02. Spatial Ambient Glass Frameworks Challenge Screen Domination</h3>
+                <p>Recent developments in micro-optics show a distinct consumer movement toward localized translation arrays, stepping away from physical handheld hardware units.</p>
+            </div>
+            <div class="premium-card">
+                <span class="news-tag">Production Tools</span>
+                <h3>03. Photorealistic Physics Engines Stabilize Creative Video Pipelines</h3>
+                <p>Studio grade generative video frameworks show complete consistency in lighting layers, cutting production costs significantly for independent visual labs.</p>
+            </div>
+            <div class="premium-card">
+                <span class="news-tag">Agentic Layer</span>
+                <h3>04. Autonomous Infrastructure Ecosystems Manage Core Backends</h3>
+                <p>Cross-platform operating scripts are taking over repetitive maintenance workflows, successfully executing complex adjustments inside isolated live sandbox environments.</p>
+            </div>
+            <div class="premium-card">
+                <span class="news-tag">BioTech Research</span>
+                <h3>05. Molecular Architecture Decoded Via Multi-Layer Neutral Arrays</h3>
+                <p>Advanced calculation structures speed up synthetic protein design matrixing, compressing laboratory trial cycles down from multiple fiscal quarters to mere hours.</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h2>Latest News</h2>
-            <p>Get real-time global breaking updates and tech insights from the shifting world of AI agents.</p>
-            <a href="news.html" class="btn">Read Updates</a>
+        <h2 id="articles" class="section-heading">In-Depth Research & Essays</h2>
+        <div class="grid-2">
+            <div class="premium-card article-card">
+                <div class="read-time">8 Min Read • Systems Engineering</div>
+                <h3>Decoupling Hype from Utility: The Micro-Integration of Neural Assistance</h3>
+                <p>An honest analysis of how modern enterprises are silently embedding predictive intelligence into everyday software arrays without disrupting standard user trust frameworks.</p>
+            </div>
+            <div class="premium-card article-card">
+                <div class="read-time">12 Min Read • Behavioral Economics</div>
+                <h3>The Cognitive Premium: Why Human Authenticity Matters in Automated Contexts</h3>
+                <p>As computational text outputs grow exponentially, consumer preference is shifting back toward deeply nuanced, error-tolerant human documentation structures.</p>
+            </div>
+            <div class="premium-card article-card">
+                <div class="read-time">10 Min Read • Future Proofing</div>
+                <h3>The 80/20 Rule of Technological Shifts: Navigating Modern Dev Pipelines</h3>
+                <p>A deep structural exploration into identifying foundational development logic loops that yield maximum performance gains while offloading syntax overhead to smart systems.</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h2>In-Depth Articles</h2>
-            <p>Read beautifully constructed human-written stories on deep learning and neural breakthroughs.</p>
-            <a href="articles.html" class="btn">Browse Articles</a>
+        <h2 id="prompts" class="section-heading">Verified Prompt Engineering Library</h2>
+        <div class="prompt-list">
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#01</span><span class="p-cat">Copywriting Frameworks</span></div>
+                <div class="prompt-code">"Act as a master copywriter. Write a 1000-word essay on [Topic]. Introduce deliberate structural variations, utilize varied paragraph lengths, and emphasize realistic storytelling logic."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#02</span><span class="p-cat">Organic Retention</span></div>
+                <div class="prompt-code">"Draft a narrative-driven technical case study layout. Focus heavily on actual system bottlenecks discovered during implementation phases rather than marketing conclusions."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#03</span><span class="p-cat">Script Architecture</span></div>
+                <div class="prompt-code">"Structure an educational multimedia breakdown explaining [Concept]. Build a high-retention structural map using immediate pattern interrupts within the opening twenty seconds."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#04</span><span class="p-cat">Database Engineering</span></div>
+                <div class="prompt-code">"Review this query for potential nested loop bottlenecks. Refactor using clear CTE pathways and index-friendly filtering conditions: [Insert Query]"</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#05</span><span class="p-cat">User Interface Layouts</span></div>
+                <div class="prompt-code">"Generate responsive semantic HTML5 layouts using flexible grids for an asymmetrical analytical panel dashboard. Utilize minimal native styling structures."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#06</span><span class="p-cat">Audience Mapping</span></div>
+                <div class="prompt-code">"Construct a behavioral user profile for developers adjusting from monolithic code architectures to decoupled operational micro-services. List core structural pain points."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#07</span><span class="p-cat">SEO Semantic Clusters</span></div>
+                <div class="prompt-code">"Perform a semantic map query surrounding [Topic]. Organize intent layers into strictly informational versus active diagnostic search patterns."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#08</span><span class="p-cat">Growth Messaging</span></div>
+                <div class="prompt-code">"Formulate an optimization landing string layout built completely around the PAS framework. Eliminate generic value declarations entirely."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#09</span><span class="p-cat">Outreach Strategies</span></div>
+                <div class="prompt-code">"Draft an unambiguous, hyper-targeted zero-fluff communication proposal for systems engineering leads, keeping total text blocks under a hundred words."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#10</span><span class="p-cat">Debugging Blocks</span></div>
+                <div class="prompt-code">"Analyze this function implementation block for memory leaks or unhandled promise errors during high-frequency parallel polling: [Paste block]"</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#11</span><span class="p-cat">Integration Modules</span></div>
+                <div class="prompt-code">"Build boilerplate modular integration functions implementing native error handling patterns for paginated data ingestion pipelines."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#12</span><span class="p-cat">Automated Testing</span></div>
+                <div class="prompt-code">"Generate comprehensive test fixtures evaluating boundary configurations and edge data objects inside this mathematical parsing class: [Insert Code]"</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#13</span><span class="p-cat">Accelerated Learning</span></div>
+                <div class="prompt-code">"Deconstruct the architecture of distributed network consensus models using first-principles logic. Focus entirely on structural trade-offs."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#14</span><span class="p-cat">Photorealism Engineering</span></div>
+                <div class="prompt-code">"A candid candid snapshot of a research engineer inside a minimal modern laboratory room, natural diffused window lighting, raw film grain textures, shot on 50mm --ar 16:9 --v 6.0"</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#15</span><span class="p-cat">Vector Generation</span></div>
+                <div class="prompt-code">"A clean geometry-focused abstract emblem vector layout for a data infrastructure system, solid matte gray elements on an isolated crisp layout background --v 6.0"</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#16</span><span class="p-cat">Advanced Synthesis</span></div>
+                <div class="prompt-code">"Synthesize the practical systems optimization insights from the provided non-fiction manual. Provide structured operational flow charts based on its thesis."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#17</span><span class="p-cat">UI Content Architecture</span></div>
+                <div class="prompt-code">"Review the microcopy inside this user setup checkout tunnel. Modify text strings to clearly eliminate cognitive confusion regarding data tracking."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#18</span><span class="p-cat">Performance Mapping</span></div>
+                <div class="prompt-code">"Design a system load mapping framework tracking data ingestion delays over multi-regional cloud distribution pathways. Propose backup routing patterns."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#19</span><span class="p-cat">Productivity Auditing</span></div>
+                <div class="prompt-code">"Analyze my current deep-work scheduling block parameters. Identify structural focus points where task switching introduces significant mental fatigue loops."</div>
+            </div>
+            <div class="prompt-row">
+                <div class="prompt-header"><span class="p-num">#20</span><span class="p-cat">API System Strategy</span></div>
+                <div class="prompt-code">"Generate clean schema rules establishing payload limits and strict query filtering boundaries across an internal communication network architecture."</div>
+            </div>
         </div>
+
     </div>
 
+    <footer>
+        <p>Connect With Our Premium Content Channels</p>
+        <div class="social-links">
+            <a href="#" target="_blank" class="instagram">Instagram</a>
+            <a href="#" target="_blank" class="youtube">YouTube</a>
+            <a href="#" target="_blank" class="pinterest">Pinterest</a>
+        </div>
+    </footer>
+
+    <script>
+        function updatePortalDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today  = new Date();
+            document.getElementById("current-date").innerText = today.toLocaleDateString("en-US", options);
+        }
+        updatePortalDate();
+    </script>
 </body>
 </html>
