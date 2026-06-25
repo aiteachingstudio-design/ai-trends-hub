@@ -1,506 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PromptPulse | AI Trending Prompts, News & Blogs</title>
-  <meta name="description" content="Stay ahead of the curve with daily trending AI prompts, tech news, and deep-dive technical blogs. Try prompts instantly in our playground.">
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trends Hub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #1e293b;
+            color: white;
+            padding: 30px 20px;
+        }
+        h1 { margin: 0; font-size: 2.5rem; }
+        
+        /* Navigation Menu Styling */
+        nav {
+            background-color: #334155;
+            padding: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card h2 { color: #1e293b; }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #0284c7;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover { background-color: #0369a1; }
+    </style>
 </head>
 <body>
 
-  <!-- Background Glow Orbs -->
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
-  <div class="bg-orb orb-3"></div>
+    <header>
+        <h1>AI Trends Hub</h1>
+        <p>AI ki Dunya ki Taza Tareen Updates</p>
+    </header>
 
-  <!-- Header Navigation -->
-  <header class="app-header">
-    <div class="container header-container">
-      <a href="#home" class="app-logo" id="nav-logo">
-        <div class="logo-icon">
-          <i class="fa-solid fa-brain-circuit"></i>
-        </div>
-        <span>Prompt<span class="logo-highlight">Pulse</span></span>
-      </a>
-      
-      <nav class="app-nav">
-        <ul>
-          <li><a href="#home" class="nav-link active" data-target="home"><i class="fa-solid fa-chart-line"></i> Home</a></li>
-          <li><a href="#prompts" class="nav-link" data-target="prompts"><i class="fa-solid fa-terminal"></i> Prompts</a></li>
-          <li><a href="#news" class="nav-link" data-target="news"><i class="fa-solid fa-newspaper"></i> News</a></li>
-          <li><a href="#blogs" class="nav-link" data-target="blogs"><i class="fa-solid fa-book-open"></i> Blogs</a></li>
-          <li><a href="#submit" class="nav-link nav-btn" data-target="submit"><i class="fa-solid fa-plus"></i> Submit</a></li>
-        </ul>
-      </nav>
-      
-      <button class="mobile-menu-toggle" id="menu-toggle">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-  </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="prompts.html">Daily Prompts</a>
+        <a href="news.html">Latest News</a>
+        <a href="articles.html">Articles</a>
+    </nav>
 
-  <!-- Mobile Navigation Drawer -->
-  <div class="mobile-nav" id="mobile-nav">
-    <div class="mobile-nav-close" id="mobile-nav-close">
-      <i class="fa-solid fa-xmark"></i>
-    </div>
-    <ul>
-      <li><a href="#home" class="mobile-link active" data-target="home"><i class="fa-solid fa-chart-line"></i> Home</a></li>
-      <li><a href="#prompts" class="mobile-link" data-target="prompts"><i class="fa-solid fa-terminal"></i> Prompts</a></li>
-      <li><a href="#news" class="mobile-link" data-target="news"><i class="fa-solid fa-newspaper"></i> News</a></li>
-      <li><a href="#blogs" class="mobile-link" data-target="blogs"><i class="fa-solid fa-book-open"></i> Blogs</a></li>
-      <li><a href="#submit" class="mobile-link mobile-btn" data-target="submit"><i class="fa-solid fa-plus"></i> Submit Prompt</a></li>
-    </ul>
-  </div>
-
-  <main class="app-main">
-    
-    <!-- SECTION: HOME / DASHBOARD -->
-    <section id="sec-home" class="app-section active">
-      <!-- Hero Banner -->
-      <div class="hero-section container">
-        <div class="hero-content">
-          <span class="hero-badge"><i class="fa-solid fa-sparkles"></i> AI Pulse of the Day</span>
-          <h1 class="hero-title">Unlock the Secrets of <span class="gradient-text">Generative AI</span></h1>
-          <p class="hero-desc">Access daily trending prompts, breaking AI industry news, and informative blogs curated by engineering experts. Test prompts instantly with our simulation playground.</p>
-          
-          <div class="hero-search-bar">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" id="hero-search-input" placeholder="Search prompts, news, or articles...">
-            <button class="btn btn-primary" id="hero-search-btn">Search</button>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-value" id="stat-prompts-count">240+</span>
-              <span class="stat-label">Trending Prompts</span>
-            </div>
-            <div class="divider"></div>
-            <div class="stat-item">
-              <span class="stat-value" id="stat-news-count">18</span>
-              <span class="stat-label">Daily Updates</span>
-            </div>
-            <div class="divider"></div>
-            <div class="stat-item">
-              <span class="stat-value">99.8%</span>
-              <span class="stat-label">Copy Success</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="hero-image-container">
-          <div class="glass-image-wrapper">
-            <img src="assets/hero_ai_network.png" alt="Futuristic AI Neural Network Banner" class="hero-image">
-            <div class="glass-overlay"></div>
-            <div class="floating-card c-1">
-              <i class="fa-solid fa-bolt text-cyan"></i>
-              <div>
-                <h4>Top Prompt</h4>
-                <p>Socratic Code Reviewer</p>
-              </div>
-            </div>
-            <div class="floating-card c-2">
-              <i class="fa-solid fa-fire text-amber"></i>
-              <div>
-                <h4>Trending</h4>
-                <p>Midjourney v6 Cinematic</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Action Cards Grid -->
-      <div class="container section-margin">
-        <h2 class="section-title">Today's Highlights</h2>
-        <div class="highlights-grid">
-          <!-- Prompts Showcase -->
-          <div class="highlight-column">
-            <div class="column-header">
-              <h3><i class="fa-solid fa-terminal text-cyan"></i> Top Prompts</h3>
-              <a href="#prompts" class="btn-text view-all-prompts">View All <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="highlight-list" id="home-prompts-list">
-              <!-- Rendered Dynamically -->
-            </div>
-          </div>
-
-          <!-- News Showcase -->
-          <div class="highlight-column">
-            <div class="column-header">
-              <h3><i class="fa-solid fa-newspaper text-violet"></i> Hot Off the Press</h3>
-              <a href="#news" class="btn-text view-all-news">View All <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="highlight-list" id="home-news-list">
-              <!-- Rendered Dynamically -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Featured Blog Banner -->
-      <div class="container section-margin" id="featured-blog-container">
-        <!-- Rendered Dynamically -->
-      </div>
-
-      <!-- Newsletter Area -->
-      <div class="container section-margin">
-        <div class="newsletter-card">
-          <div class="newsletter-glow"></div>
-          <div class="newsletter-body">
-            <div class="newsletter-content">
-              <h3>Subscribe to the Daily Pulse</h3>
-              <p>Get the absolute best prompts, AI research papers summarized, and technical blogs sent directly to your inbox every morning.</p>
-            </div>
-            <form class="newsletter-form" id="newsletter-form">
-              <input type="email" placeholder="Enter your developer email" required id="newsletter-email">
-              <button type="submit" class="btn btn-primary">Subscribe <i class="fa-solid fa-paper-plane"></i></button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: PROMPTS -->
-    <section id="sec-prompts" class="app-section">
-      <div class="container section-padding">
-        <div class="section-header-flex">
-          <div>
-            <h1 class="page-title">AI Prompts Hub</h1>
-            <p class="page-subtitle">Hand-crafted prompts designed to maximize the performance of ChatGPT, Claude, and Midjourney.</p>
-          </div>
-          <div class="search-filters-bar">
-            <div class="search-input-wrapper">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="prompts-search" placeholder="Search prompts...">
-            </div>
-            
-            <div class="dropdown-filter">
-              <select id="filter-category" class="filter-select">
-                <option value="all">All Categories</option>
-                <option value="Coding">Coding</option>
-                <option value="Image Gen">Image Gen</option>
-                <option value="Writing">Writing</option>
-                <option value="Productivity">Productivity</option>
-              </select>
-            </div>
-
-            <div class="dropdown-filter">
-              <select id="filter-difficulty" class="filter-select">
-                <option value="all">All Difficulties</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-              </select>
-            </div>
-          </div>
+    <div class="container">
+        <div class="card">
+            <h2>Daily Prompts</h2>
+            <p>Apne kaam ko aasan banane ke liye behtareen AI prompts hasil karen.</p>
+            <a href="prompts.html" class="btn">Prompts Dekhen</a>
         </div>
 
-        <!-- Prompts Grid -->
-        <div class="prompts-grid" id="prompts-grid-container">
-          <!-- Rendered Dynamically -->
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: DAILY NEWS -->
-    <section id="sec-news" class="app-section">
-      <div class="container section-padding">
-        <div class="section-header-flex">
-          <div>
-            <h1 class="page-title">Daily AI News</h1>
-            <p class="page-subtitle">Stay informed with direct, high-signal breaking news summaries from the forefront of artificial intelligence.</p>
-          </div>
-          <div class="news-topic-filters" id="news-category-filters">
-            <button class="topic-chip active" data-cat="all">All News</button>
-            <button class="topic-chip" data-cat="LLMs">LLMs</button>
-            <button class="topic-chip" data-cat="Robotics">Robotics</button>
-            <button class="topic-chip" data-cat="Policy">Policy</button>
-          </div>
+        <div class="card">
+            <h2>Latest News</h2>
+            <p>Artificial Intelligence ki dunya mein kya chal raha hai? Sab yahan janiye.</p>
+            <a href="news.html" class="btn">News Parhen</a>
         </div>
 
-        <!-- News Grid -->
-        <div class="news-grid" id="news-grid-container">
-          <!-- Rendered Dynamically -->
+        <div class="card">
+            <h2>Articles</h2>
+            <p>AI trends aur deep learning par tafseeli aur maloomati articles.</p>
+            <a href="articles.html" class="btn">Articles Parhen</a>
         </div>
-      </div>
-    </section>
-
-    <!-- SECTION: BLOGS -->
-    <section id="sec-blogs" class="app-section">
-      <div class="container section-padding">
-        <div class="section-header-flex">
-          <div>
-            <h1 class="page-title">Informative Blogs</h1>
-            <p class="page-subtitle">Deep dives, tutorials, and guides written by developers for developers about mastering generative AI.</p>
-          </div>
-        </div>
-
-        <!-- Blogs Grid -->
-        <div class="blogs-grid" id="blogs-grid-container">
-          <!-- Rendered Dynamically -->
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: SUBMIT -->
-    <section id="sec-submit" class="app-section">
-      <div class="container section-padding">
-        <div class="submit-layout">
-          <div class="submit-info">
-            <h1 class="page-title">Submit Content</h1>
-            <p class="page-subtitle">Have a stellar prompt or a breaking AI news article? Share it with the PromptPulse community.</p>
-            <div class="submit-benefits">
-              <div class="benefit-item">
-                <i class="fa-solid fa-award text-cyan"></i>
-                <div>
-                  <h4>Gain Exposure</h4>
-                  <p>Your submissions appear dynamically in the dashboard feed for review.</p>
-                </div>
-              </div>
-              <div class="benefit-item">
-                <i class="fa-solid fa-code text-violet"></i>
-                <div>
-                  <h4>Playground Integration</h4>
-                  <p>Submitted prompts immediately generate simulated sandbox conversations.</p>
-                </div>
-              </div>
-              <div class="benefit-item">
-                <i class="fa-solid fa-database text-amber"></i>
-                <div>
-                  <h4>Stored Locally</h4>
-                  <p>All items save instantly to your browser storage for editing and testing.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="submit-card">
-            <div class="submit-tabs">
-              <button class="submit-tab-btn active" id="tab-submit-prompt">Submit Prompt</button>
-              <button class="submit-tab-btn" id="tab-submit-news">Submit News</button>
-            </div>
-
-            <!-- PROMPT SUBMISSION FORM -->
-            <form id="form-submit-prompt" class="submit-form active">
-              <div class="form-group">
-                <label for="prompt-title">Prompt Title</label>
-                <input type="text" id="prompt-title" placeholder="e.g. Socratic Code Reviewer" required>
-              </div>
-
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="prompt-category">Category</label>
-                  <select id="prompt-category" required>
-                    <option value="Coding">Coding</option>
-                    <option value="Image Gen">Image Gen</option>
-                    <option value="Writing">Writing</option>
-                    <option value="Productivity">Productivity</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="prompt-difficulty">Difficulty</label>
-                  <select id="prompt-difficulty" required>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="prompt-desc">Short Description</label>
-                <input type="text" id="prompt-desc" placeholder="Briefly describe what this prompt accomplishes..." required>
-              </div>
-
-              <div class="form-group">
-                <label for="prompt-content">Prompt Instructions</label>
-                <textarea id="prompt-content" rows="6" placeholder="Act as a... [Write instructions here]" required></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="prompt-resp-user">Sample User Input (for Playground)</label>
-                <input type="text" id="prompt-resp-user" placeholder="e.g., Run review on fetchUserData()..." required>
-              </div>
-
-              <div class="form-group">
-                <label for="prompt-resp-ai">Expected AI Response (for Playground Simulation)</label>
-                <textarea id="prompt-resp-ai" rows="4" placeholder="How should the AI respond to this sample input?" required></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-block">Add Prompt <i class="fa-solid fa-plus"></i></button>
-            </form>
-
-            <!-- NEWS SUBMISSION FORM -->
-            <form id="form-submit-news" class="submit-form">
-              <div class="form-group">
-                <label for="news-title">News Title</label>
-                <input type="text" id="news-title" placeholder="e.g. AI-Powered Debugging reaches new limits" required>
-              </div>
-
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="news-source">Source Name</label>
-                  <input type="text" id="news-source" placeholder="e.g. AI News Daily" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="news-category">Category Tag</label>
-                  <select id="news-category" required>
-                    <option value="LLMs">LLMs</option>
-                    <option value="Robotics">Robotics</option>
-                    <option value="Policy">Policy</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="news-summary">Summary</label>
-                <textarea id="news-summary" rows="5" placeholder="Provide a summary of the news story..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-block">Publish News <i class="fa-solid fa-plus"></i></button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- MODAL: DETAILED BLOG READER -->
-  <div class="blog-reader-modal" id="blog-reader-modal">
-    <div class="blog-reader-content">
-      <div class="blog-reader-header-bg" id="blog-header-img" style="background-image: url('assets/blog_prompt_engineering.png')">
-        <div class="blog-reader-header-overlay"></div>
-        <button class="blog-reader-close" id="blog-reader-close-btn">
-          <i class="fa-solid fa-xmark"></i> Close Reader
-        </button>
-      </div>
-
-      <div class="blog-reader-body container">
-        <div class="blog-reader-meta">
-          <span class="blog-reader-author" id="blog-author-display"><i class="fa-solid fa-user-pen"></i> By Author</span>
-          <span class="blog-reader-date" id="blog-date-display"><i class="fa-solid fa-calendar-days"></i> June 25, 2026</span>
-          <span class="blog-reader-time" id="blog-time-display"><i class="fa-solid fa-clock"></i> 8 min read</span>
-        </div>
-        
-        <h1 class="blog-reader-title" id="blog-title-display">Blog Title Here</h1>
-        
-        <div class="blog-reader-html" id="blog-content-display">
-          <!-- Rendered Dynamically -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DRAWER: PROMPT PLAYGROUND SIMULATOR -->
-  <div class="playground-drawer" id="playground-drawer">
-    <div class="playground-header">
-      <div class="playground-title-group">
-        <h3><i class="fa-solid fa-terminal text-cyan"></i> Prompt Playground</h3>
-        <p id="playground-subtitle">Testing: Socratic Code Reviewer</p>
-      </div>
-      <button class="playground-close" id="playground-close-btn"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div class="playground-layout">
-      <!-- Left Panel: Prompt Details -->
-      <div class="playground-editor">
-        <h4>Active Prompt Instructions</h4>
-        <div class="prompt-text-display" id="playground-prompt-body">
-          Act as a Socratic Code Reviewer...
-        </div>
-        <div class="editor-actions">
-          <button class="btn btn-secondary" id="playground-copy-btn"><i class="fa-solid fa-copy"></i> Copy Prompt</button>
-          <div class="copied-toast" id="playground-copied-toast"><i class="fa-solid fa-circle-check"></i> Copied!</div>
-        </div>
-      </div>
-
-      <!-- Right Panel: Conversation Stream -->
-      <div class="playground-chat">
-        <div class="chat-header">
-          <span class="badge badge-success"><i class="fa-solid fa-circle"></i> Simulation Sandbox Active</span>
-        </div>
-        
-        <div class="chat-messages" id="playground-chat-messages">
-          <!-- Simulated conversation turns -->
-        </div>
-
-        <div class="chat-input-area">
-          <div class="chat-input-wrapper">
-            <input type="text" id="playground-chat-input" placeholder="Type a message or press 'Simulate'..." readonly>
-            <button class="btn btn-primary" id="playground-simulate-btn">Simulate Prompt <i class="fa-solid fa-wand-magic-sparkles"></i></button>
-          </div>
-          <p class="chat-tip"><i class="fa-solid fa-circle-info"></i> Running in client-side sandbox mode. No API key required.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Notification Toast -->
-  <div class="toast-notification" id="toast-notif">
-    <i class="fa-solid fa-circle-check toast-icon"></i>
-    <span class="toast-message" id="toast-notif-message">Prompt copied to clipboard successfully!</span>
-  </div>
-
-  <!-- Footer -->
-  <footer class="app-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <div class="app-logo">
-          <div class="logo-icon">
-            <i class="fa-solid fa-brain-circuit"></i>
-          </div>
-          <span>Prompt<span class="logo-highlight">Pulse</span></span>
-        </div>
-        <p>A premium repository of trending AI prompt architectures, breaking industry updates, and expert developer articles.</p>
-        <div class="footer-socials">
-          <a href="#"><i class="fa-brands fa-github"></i></a>
-          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-discord"></i></a>
-        </div>
-      </div>
-      <div class="footer-links">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#home" class="footer-nav-link" data-target="home">Dashboard</a></li>
-          <li><a href="#prompts" class="footer-nav-link" data-target="prompts">Trending Prompts</a></li>
-          <li><a href="#news" class="footer-nav-link" data-target="news">Industry News</a></li>
-          <li><a href="#blogs" class="footer-nav-link" data-target="blogs">Expert Blogs</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="#">Security Guardrails</a></li>
-          <li><a href="#">Midjourney Style Guide</a></li>
-          <li><a href="#">Claude system templates</a></li>
-          <li><a href="#">Socratic review loops</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom container">
-      <p>&copy; 2026 PromptPulse Hub. Designed for advanced engineering workflows.</p>
-      <p>All assets are dynamically generated & stored locally.</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="data.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
