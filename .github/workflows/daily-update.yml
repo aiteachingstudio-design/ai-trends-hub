@@ -1,0 +1,36 @@
+name: Daily AI Trends Update
+
+on:
+  schedule:
+    # Yeh robot har roz subah 6:00 baje (UTC time) khud chalega
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Is se aap jab chahein button daba kar bhi ise khud chala sakti hain
+
+jobs:
+  update-website:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Repository ka code check out karna
+      uses: actions/checkout@v3
+
+    - name: Python install karna
+      uses: actions/setup-python@v4
+      with:
+        python-python: '3.10'
+
+    - name: Zaroori Libraries install karna
+      run: |
+        pip install google-generativeai
+
+    - name: Python Script ko chalana
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: python automation.py
+
+    - name: Badlao ko GitHub par save (Commit) karna
+      run: |
+        git config --global user.name "GitHub Action Bot"
+        git config --global user.email "actions@github.com"
+        git add index.html
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Automated Daily Update" && git push)
