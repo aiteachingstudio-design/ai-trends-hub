@@ -4,7 +4,7 @@ on:
   schedule:
     # Yeh robot har roz subah 6:00 baje (UTC time) khud chalega
     - cron: '0 6 * * *'
-  workflow_dispatch: # Is se aap jab chahein button daba kar bhi ise khud chala sakti hain
+  workflow_dispatch: # Is se aap jaise pehle chala rahi thi, khud bhi chala sakti hain
 
 jobs:
   update-website:
@@ -17,7 +17,7 @@ jobs:
     - name: Python install karna
       uses: actions/setup-python@v4
       with:
-        python-python: '3.10'
+        python-version: '3.10'
 
     - name: Zaroori Libraries install karna
       run: |
