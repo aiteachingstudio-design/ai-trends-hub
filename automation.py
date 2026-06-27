@@ -2,27 +2,32 @@ import os
 import google.generativeai as genai
 from datetime import datetime
 
-# Gemini API ko configure karna
+# Gemini API ko naye tareeqay se configure karna
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_KEY)
-model = genai.GenerativeModel('gemini-pro')
 
 def generate_content():
     current_date = datetime.now().strftime("%d %B %Y")
     
     print("AI se content generate ho raha hai...")
     
+    # Naya recommended model 'gemini-1.5-flash' istemal kar rahe hain
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    
     # 1. Prompts ki request
-    prompt_query = "Generate 3 highly useful and trending ChatGPT prompts for developers or designers. Format them nicely with headings."
-    prompts = model.generate_content(prompt_query).text
+    prompt_query = "Generate 3 highly useful and trending ChatGPT prompts for developers or designers. Format them nicely with markdown headings."
+    prompts_response = model.generate_content(prompt_query)
+    prompts = prompts_response.text if prompts_response.text else "No prompts generated."
     
     # 2. Tech News ki request
     news_query = "Provide 2 latest technology news bullet points for today. Keep it short and exciting."
-    news = model.generate_content(news_query).text
+    news_response = model.generate_content(news_query)
+    news = news_response.text if news_response.text else "No news available today."
     
     # 3. 1000 Words Article ki request
-    article_query = "Write a comprehensive 1000-word educational article on a trending AI or Tech topic. Include headings, introduction, and conclusion."
-    article = model.generate_content(article_query).text
+    article_query = "Write a comprehensive educational article on a trending AI or Tech topic. Include headings, introduction, and conclusion."
+    article_response = model.generate_content(article_query)
+    article = article_response.text if article_response.text else "No article generated."
     
     # Naya HTML page ka design aur content
     html_content = f"""<!DOCTYPE html>
