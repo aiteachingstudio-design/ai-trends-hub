@@ -23,7 +23,7 @@ jobs:
 
       - name: Latest Gemini Library install karna
         run: |
-          pip install google-genai
+          pip install google-generativeai
 
       - name: Automation Script chalana
         env:
