@@ -18,4 +18,3 @@ def ask_gemini(prompt_text):
         )
         with urllib.request.urlopen(req) as response:
             res = json.loads(response.read().decode('utf-8'))
-            
