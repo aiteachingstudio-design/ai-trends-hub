@@ -1,12 +1,12 @@
 name: Daily AI Trends Update
 
 on:
-  workflow_dispatch: # Taaki aap jab chahein manually run kar sakein
+  workflow_dispatch: # Manually run karne ke liye
   schedule:
-    - cron: '0 5 * * *' # Yeh daily subah 10:00 AM Pakistan ke mutabiq khud chalega
+    - cron: '0 5 * * *' # Pakistan ke mutabiq daily subah 10:00 baje chalega
 
 permissions:
-  contents: write # Website update push karne ke liye zaroori permission
+  contents: write # Code push karne ki permission
 
 jobs:
   update-website:
@@ -19,11 +19,11 @@ jobs:
       - name: Python setup karna
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11' # Naye packages ke liye Python 3.11 behtar hy
 
-      - name: Dependencies install karna
+      - name: Latest Gemini Library install karna
         run: |
-          google-genai
+          pip install google-genai
 
       - name: Automation Script chalana
         env:
