@@ -1,11 +1,9 @@
 name: Daily AI Trends Update
 
 on:
+  workflow_dispatch: # Taaki aap jab chahein manually bhi chala sakein
   schedule:
-    # Yeh robot har roz subah 6:00 baje (UTC time) khud chalega
-    - cron: '0 6 * * *'
-  workflow_dispatch: # Is se aap jaise pehle chala rahi thi, khud bhi chala sakti hain
-
+    - cron: '0 0 * * *' # Yeh daily raat 12:00 UTC (Pakistan ke time ke mutabiq subah 5:00 baje) khud chalega
 jobs:
   update-website:
     runs-on: ubuntu-latest
