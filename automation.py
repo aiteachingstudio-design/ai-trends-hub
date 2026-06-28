@@ -19,4 +19,4 @@ def ask_gemini(prompt_text):
         with urllib.request.urlopen(req) as response:
             res = json.loads(response.read().decode('utf-8'))
             return res['candidates'][0]['content']['parts'][0]['text']
-    exceptNormally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+    Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
