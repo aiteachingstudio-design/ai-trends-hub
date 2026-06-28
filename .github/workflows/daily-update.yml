@@ -23,7 +23,7 @@ jobs:
 
       - name: Dependencies install karna
         run: |
-          pip install google-generativeai
+          google-genai
 
       - name: Automation Script chalana
         env:
